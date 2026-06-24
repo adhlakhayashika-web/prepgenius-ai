@@ -128,3 +128,99 @@ questions = {
         {"name": "Search Suggestions System", "completed": False}
     ]
 }
+
+
+
+difficulty_map = {
+    "Merge Strings Alternately": "Easy",
+    "Greatest Common Divisor of Strings": "Easy",
+    "Kids With the Greatest Number of Candies": "Easy",
+    "Can Place Flowers": "Easy",
+    "Reverse Vowels of a String": "Easy",
+    "Reverse Words in a String": "Medium",
+    "Product of Array Except Self": "Medium",
+    "Increasing Triplet Subsequence": "Medium",
+    "String Compression": "Medium",
+
+    "Move Zeroes": "Easy",
+    "Is Subsequence": "Easy",
+    "Container With Most Water": "Medium",
+    "Max Number of K-Sum Pairs": "Medium",
+
+    "Maximum Average Subarray I": "Easy",
+    "Maximum Number of Vowels in a Substring": "Medium",
+    "Max Consecutive Ones III": "Medium",
+    "Longest Subarray of 1's After Deleting One Element": "Medium",
+
+    "Find the Highest Altitude": "Easy",
+    "Find Pivot Index": "Easy",
+
+    "Find the Difference of Two Arrays": "Easy",
+    "Unique Number of Occurrences": "Easy",
+    "Determine if Two Strings Are Close": "Medium",
+    "Equal Row and Column Pairs": "Medium",
+
+    "Removing Stars From a String": "Medium",
+    "Asteroid Collision": "Medium",
+    "Decode String": "Medium",
+
+    "Number of Recent Calls": "Easy",
+    "Dota2 Senate": "Medium",
+
+    "Delete the Middle Node of a Linked List": "Medium",
+    "Odd Even Linked List": "Medium",
+    "Reverse Linked List": "Easy",
+    "Maximum Twin Sum of a Linked List": "Medium",
+
+    "Maximum Depth of Binary Tree": "Easy",
+    "Leaf-Similar Trees": "Easy",
+    "Count Good Nodes in Binary Tree": "Medium",
+    "Path Sum III": "Medium",
+
+    "Binary Tree Right Side View": "Medium",
+    "Maximum Level Sum of a Binary Tree": "Medium",
+
+    "Search in a BST": "Easy",
+    "Delete Node in a BST": "Medium",
+
+    "Keys and Rooms": "Medium",
+    "Number of Provinces": "Medium",
+    "Reorder Routes to Make All Paths Lead to the City Zero": "Medium",
+
+    "Nearest Exit from Entrance in Maze": "Medium",
+    "Rotting Oranges": "Medium",
+
+    "Kth Largest Element in an Array": "Medium",
+    "Smallest Number in Infinite Set": "Medium",
+    "Maximum Subsequence Score": "Hard",
+
+    "Guess Number Higher or Lower": "Easy",
+    "Successful Pairs of Spells and Potions": "Medium",
+    "Find Peak Element": "Medium",
+
+    "Letter Combinations of a Phone Number": "Medium",
+    "Combination Sum III": "Medium",
+
+    "N-th Tribonacci Number": "Easy",
+    "Min Cost Climbing Stairs": "Easy",
+    "House Robber": "Medium",
+    "Domino and Tromino Tiling": "Medium",
+
+    "Counting Bits": "Easy",
+    "Single Number": "Easy",
+
+    "Non-overlapping Intervals": "Medium",
+
+    "Daily Temperatures": "Medium",
+    "Online Stock Span": "Medium",
+
+    "Implement Trie (Prefix Tree)": "Medium",
+    "Search Suggestions System": "Medium"
+}
+
+for topic in questions:
+    for q in questions[topic]:
+        q["difficulty"] = difficulty_map.get(
+            q["name"],
+            "Unknown"
+        )
