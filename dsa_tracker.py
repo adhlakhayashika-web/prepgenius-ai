@@ -16,17 +16,29 @@ def view_questions():
 
     view_topics()
 
-    choice = int(input("\nSelect Topic Number: "))
+    try:
+        choice = int(input("\nSelect Topic Number: "))
 
-    if 1 <= choice <= len(topics):
-        topic = topics[choice - 1]
+        if 1 <= choice <= len(topics):
 
-        print(f"\n===== {topic} =====")
+            topic = topics[choice - 1]
 
-        for i, q in enumerate(questions[topic], start=1):
-            status = "✓" if q["completed"] else " "
+            print(f"\n===== {topic} =====")
 
-            print(f"{i}. [{status}] {q['name']}")
+            for i, q in enumerate(questions[topic], start=1):
+
+                status = "✓" if q["completed"] else " "
+
+                print(
+                    f"{i}. [{status}] {q['name']} "
+                    f"({q['difficulty']})"
+                )
+
+        else:
+            print("Invalid Topic!")
+
+    except ValueError:
+        print("Please enter a valid number!")
 
 
 def mark_complete():
@@ -34,68 +46,99 @@ def mark_complete():
 
     view_topics()
 
-    topic_choice = int(input("\nSelect Topic Number: "))
+    try:
+        topic_choice = int(input("\nSelect Topic Number: "))
 
-    if not (1 <= topic_choice <= len(topics)):
-        print("Invalid Topic!")
-        return
+        if not (1 <= topic_choice <= len(topics)):
+            print("Invalid Topic!")
+            return
 
-    topic = topics[topic_choice - 1]
+        topic = topics[topic_choice - 1]
 
-    print(f"\n===== {topic} =====")
+        print(f"\n===== {topic} =====")
 
-    for i, q in enumerate(questions[topic], start=1):
-        status = "✓" if q["completed"] else " "
+        for i, q in enumerate(questions[topic], start=1):
 
-        print(f"{i}. [{status}] {q['name']}")
+            status = "✓" if q["completed"] else " "
 
-    question_choice = int(input("\nEnter Question Number: "))
+            print(
+                f"{i}. [{status}] {q['name']} "
+                f"({q['difficulty']})"
+            )
 
-    if 1 <= question_choice <= len(questions[topic]):
-        questions[topic][question_choice - 1]["completed"] = True
+        question_choice = int(
+            input("\nEnter Question Number: ")
+        )
 
-        print("Question marked complete!")
-    else:
-        print("Invalid Question!")
+        if 1 <= question_choice <= len(questions[topic]):
+
+            questions[topic][question_choice - 1][
+                "completed"
+            ] = True
+
+            print("Question marked complete!")
+
+        else:
+            print("Invalid Question!")
+
+    except ValueError:
+        print("Please enter a valid number!")
 
 
-def show_progress():
+def show_dashboard():
+
     total_questions = 0
     completed_questions = 0
 
-    print("\n===== Progress =====")
+    easy = 0
+    medium = 0
+    hard = 0
 
     for topic in questions:
-        total = len(questions[topic])
-        completed = sum(q["completed"] for q in questions[topic])
 
-        total_questions += total
-        completed_questions += completed
+        for q in questions[topic]:
 
-        percentage = (completed / total) * 100
+            total_questions += 1
 
-        print(
-            f"{topic}: {completed}/{total} ({percentage:.1f}%)"
-        )
+            if q["completed"]:
 
-    overall = (
+                completed_questions += 1
+
+                if q["difficulty"] == "Easy":
+                    easy += 1
+
+                elif q["difficulty"] == "Medium":
+                    medium += 1
+
+                elif q["difficulty"] == "Hard":
+                    hard += 1
+
+    progress = (
         completed_questions / total_questions
     ) * 100
 
-    print("\n----------------------")
+    print("\n===== USER DASHBOARD =====")
+
+    print(f"Questions Solved : {completed_questions}")
+    print(f"Easy Solved      : {easy}")
+    print(f"Medium Solved    : {medium}")
+    print(f"Hard Solved      : {hard}")
+
     print(
-        f"Overall: {completed_questions}/{total_questions}"
+        f"\nOverall Progress : {progress:.1f}%"
     )
-    print(f"Progress: {overall:.1f}%")
 
 
 while True:
 
-    print("\n===== PrepGenius AI =====")
+    print("\n==========================")
+    print("      PREPGENIUS AI")
+    print("==========================")
+
     print("1. View Topics")
     print("2. View Questions")
     print("3. Mark Question Complete")
-    print("4. Show Progress")
+    print("4. Show Dashboard")
     print("5. Exit")
 
     choice = input("\nEnter Choice: ")
@@ -110,10 +153,10 @@ while True:
         mark_complete()
 
     elif choice == "4":
-        show_progress()
+        show_dashboard()
 
     elif choice == "5":
-        print("Goodbye!")
+        print("\nGoodbye!")
         break
 
     else:
